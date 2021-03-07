@@ -1,13 +1,27 @@
-# hta_tools
+# QinTechBoard
 
-## HTA(HTML Application)とは
+## QinTechBoardとは
 
-WindowsでHTMLファイルをデスクトップアプリケーションの様に実行できる機能のこと
+Qinで共有されている技術をまとめたサービスです。
 
-## 用途
+## 目的
 
-ローカルを参照することができるため、VBScriptやJScriptと組み合わせて使用されることが多い
+新規入国者がサロン内で利用されている技術の用語を探しやすくすることで、
+用語の共通化を促進し円滑なコミュニケーションを取れるようにする！
 
-## 専用タグ HTA
 
-http://www4.airnet.ne.jp/hasikun/webtech/hta/hta-f.html
+## 編集
+
+https://docs.google.com/spreadsheets/d/1YbsuM0BXP1F8OJqejf7LvGY3pxStzdvzIF4xfQ-TRK0/edit#gid=1759313742
+
+## 公開リンク
+
+https://cti1650.github.io/qin_tech_board/index.html
+
+## 使用技術
+
+項目|技術
+:-:|:-:
+DB|Googleスプレッドシート
+バックエンド|GAS
+フロントエンド|Vue.js + tailwind.css (CDN)
