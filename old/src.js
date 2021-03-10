@@ -1,20 +1,20 @@
 Vue.component("GrayButton", {
-  props: ["url", "summary", "title"],
+  props: ["item"],
   template: `
-      <a :href="url" target="_blank" rel="noopener noreferrer">
+      <a :href="item.url" target="_blank" rel="noopener noreferrer">
       <div class="h-full bg-gray-800 hover:shadow-inner hover:bg-gray-300 rounded-lg border border-gray-600 px-2 py-1 shadow-lg text-white hover:text-black">
-      <div class="text-xs text-gray-500">{{ summary  || '' }}</div><div class="text-xl">{{ title }}</div>
+      <div class="text-xs text-gray-500">{{ item.summary  || '' }}</div><div class="text-xl">{{ item.name }}</div>
       </div>
       </a>
       `,
 });
 
 Vue.component("GreenButton", {
-  props: ["url", "summary", "title"],
+  props: ["item"],
   template: `
-      <a :href="url" target="_blank" rel="noopener noreferrer">
+      <a :href="item.url" target="_blank" rel="noopener noreferrer">
       <div class="h-full bg-green-800 hover:shadow-inner hover:bg-green-300 rounded-lg border border-green-600 px-2 py-1 shadow-lg text-white hover:text-black">
-      <div class="text-xs text-green-500">{{ summary  || '' }}</div><div class="text-xl">{{ title }}</div>
+      <div class="text-xs text-green-500">{{ item.summary  || '' }}</div><div class="text-xl">{{ item.name }}</div>
       </div>
       </a>
       `,
@@ -42,7 +42,7 @@ Vue.component("LinkButtons", {
       <ul class="flex flex-row flex-wrap">
       <div class="w-full sm:w-1/2 lg:w-1/4 p-1" v-for="item in items">
       <ButtonItem :item="item">
-        <GrayButton :url="item['URL']" :title="item['ツール名']" :summary="item['分類']">
+        <GrayButton :item="item">
       </ButtonItem>
       <div>
       </ul>
@@ -55,7 +55,7 @@ Vue.component("ArticlesButtons", {
       <ul class="flex flex-row flex-wrap">
       <div class="w-full lg:w-1/2 p-1" v-for="item in items">
       <ButtonItem :item="item">
-        <GrayButton :url="item['URL']" :title="item['ツール名']" :summary="item['分類']">
+        <GrayButton :item="item">
       </ButtonItem>
       <div>
       </ul>
@@ -83,7 +83,7 @@ Vue.component("tool", {
       let self = this;
       axios
         .get(
-          "https://script.google.com/macros/s/AKfycbzdElyGY3H5HYcoUKOxOG9-F7LpmwlPe2y13jZv3lskhajjF20A4KiZNT7e6EoMvF2aOQ/exec"
+          "https://script.google.com/macros/s/AKfycbw-FHf7In9FfwHy9ZjWcpU5kRz6KskqkUiK6I6FYW6ACV67llxoHiv6C_kYwFAcal-g/exec"
         )
         .then(function (res) {
           console.log(res);
@@ -94,13 +94,11 @@ Vue.component("tool", {
   template: `
   <div>
   <ListTitle title="ツール＆サービス" />
-  <LinkButtons :items="items.data['ツール＆サービス']"></LinkButtons>
+  <LinkButtons :items="items.tools"></LinkButtons>
   <ListTitle title="npm module" />
-  <LinkButtons :items="items.data['node.jsモジュール']"></LinkButtons>
+  <LinkButtons :items="items.modules"></LinkButtons>
   <ListTitle title="記事" />
-  <ArticlesButtons :items="items.data['参考記事']"></ArticlesButtons>
-  <ListTitle title="Qin-Design共有シート" />
-  <LinkButtons :items="items.data['Qin-Design共有シート']"></LinkButtons>
+  <ArticlesButtons :items="items.articles"></ArticlesButtons>
   </div>
   `,
 });
