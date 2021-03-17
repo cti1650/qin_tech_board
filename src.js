@@ -133,6 +133,7 @@ Vue.component("tool", {
   <ListTitle title="フォーム受付" />
   <FormAddButtons :items="items.data['フォーム受付']"></FormAddButtons>
   <ListTitle title="受付フォーム" />
+  <div class="w-full text-white text-sm">フォームで追加された内容はおおよそ10分後に反映されますのでしばらくお待ちください！</div>
   <GoogleForm />
   </div>
   `,
