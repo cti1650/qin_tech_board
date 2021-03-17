@@ -62,10 +62,39 @@ Vue.component("ArticlesButtons", {
       `,
 });
 
+Vue.component("FormAddButtons", {
+  props: ["items"],
+  template: `
+      <ul class="flex flex-row flex-wrap">
+      <div class="w-full lg:w-1/2 p-1" v-for="item in items">
+      <ButtonItem :item="item">
+        <GrayButton :url="item['URL']" :title="item['名称']" :summary="item['分類']">
+      </ButtonItem>
+      <div>
+      </ul>
+      `,
+});
+
 Vue.component("ListTitle", {
   props: ["title"],
   template: `
       <div class="text-white mt-4 text-lg">{{title}}</div>
+      `,
+});
+
+Vue.component("GoogleForm", {
+  props: ["title"],
+  template: `
+  <iframe
+    src="https://docs.google.com/forms/d/e/1FAIpQLScP5qjYvNSsm-AtHVm7uQOMXsrcvSoaRyJ9fuyJLF68fdqTNg/viewform?embedded=true"
+    width="100%"
+    height="1400px"
+    frameborder="0"
+    marginheight="0"
+    marginwidth="0"
+  >
+    読み込んでいます…
+  </iframe>
       `,
 });
 
@@ -101,6 +130,10 @@ Vue.component("tool", {
   <ArticlesButtons :items="items.data['参考記事']"></ArticlesButtons>
   <ListTitle title="Qin-Design共有シート" />
   <LinkButtons :items="items.data['Qin-Design共有シート']"></LinkButtons>
+  <ListTitle title="フォーム受付" />
+  <FormAddButtons :items="items.data['フォーム受付']"></FormAddButtons>
+  <ListTitle title="受付フォーム" />
+  <GoogleForm />
   </div>
   `,
 });
