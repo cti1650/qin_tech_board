@@ -112,7 +112,7 @@ Vue.component("ScrollTop", {
     scrollTop: function () {
       window.scrollTo({
         top: 0,
-        behavior: "instant",
+        behavior: "smooth",
       });
     },
   },
