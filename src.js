@@ -118,8 +118,8 @@ Vue.component("ScrollTop", {
   },
   template: `
   <div
-    class="fixed outline-none p-auto z-50 bg-gray-700 bg-opacity-50 text-center text-gray-400 rounded-full"
-    style="padding-top:3px;right:10px;bottom:10px;width:32px;height:32px;line-none;cursor:pointer;"
+    class="fixed text-xl p-1 outline-none z-50 bg-gray-700 bg-opacity-50 text-center text-gray-400 rounded-full"
+    style="right:0.5rem;bottom:0.5rem;width:2.5rem;height:2.5rem;line-none;cursor:pointer;"
     @click="scrollTop"
   >
     ▲
