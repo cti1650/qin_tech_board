@@ -107,6 +107,26 @@ Vue.component("GoogleForm", {
       `,
 });
 
+Vue.component("ScrollTop", {
+  methods: {
+    scrollTop: function () {
+      window.scrollTo({
+        top: 0,
+        behavior: "instant",
+      });
+    },
+  },
+  template: `
+  <div
+    class="fixed outline-none p-auto z-50 bg-gray-700 bg-opacity-50 text-center text-gray-400 rounded-full"
+    style="padding-top:3px;right:10px;bottom:10px;width:32px;height:32px;line-none;cursor:pointer;"
+    @click="scrollTop"
+  >
+    ▲
+  </div>
+  `,
+});
+
 Vue.component("tool", {
   data: function () {
     return {
@@ -152,6 +172,7 @@ Vue.component("tool", {
   <ListTitle title="受付フォーム" />
   <div class="w-full text-white text-sm">フォームで追加された内容はおおよそ10分後に反映されますのでしばらくお待ちください！</div>
   <GoogleForm />
+  <ScrollTop />
   </div>
   `,
 });
