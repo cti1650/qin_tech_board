@@ -116,6 +116,7 @@ Vue.component("tool", {
   },
   mounted: function () {
     this.load();
+    setInterval(this.load, 1000 * 20);
   },
   methods: {
     load: function () {
