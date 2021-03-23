@@ -157,7 +157,7 @@ Vue.component("tool", {
   template: `
   <div>
   <div class="w-full px-4 mt-4">
-  <input type="search" class="w-full bg-black focus:bg-gray-900 outline-none rounded-full border border-gray-800 px-4 py-1 text-white" placeholder="検索" v-on:keyup="doSearch"></input>
+  <input type="search" class="w-full sticky top-0 bg-black focus:bg-gray-900 outline-none rounded-full border border-gray-800 px-4 py-1 text-white" placeholder="検索" v-on:keyup="doSearch"></input>
   </div>
   <ListTitle title="ツール＆サービス" />
   <LinkButtons :items="items.data['ツール＆サービス']" :keyword="keyword"></LinkButtons>
