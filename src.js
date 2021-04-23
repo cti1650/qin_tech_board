@@ -8,11 +8,11 @@ function keywordConv(str) {
 }
 
 Vue.component("GrayButton", {
-  props: ["url", "summary", "title"],
+  props: ["url", "summary", "title", "comment"],
   template: `
       <a :href="url" target="_blank" rel="noopener noreferrer">
       <div class="h-full bg-gray-800 hover:shadow-inner hover:bg-gray-300 rounded-lg outline-none border border-gray-600 px-2 py-1 shadow-lg text-white hover:text-black">
-      <div class="text-xs text-gray-500">{{ summary  || '' }}</div><div class="text-xl">{{ title }}</div>
+      <div class="text-xs text-gray-500">{{ summary  || '' }}</div><div class="text-xl">{{ title }}</div><div class="text-xs text-gray-500 px-4">{{ comment  || '' }}</div>
       </div>
       </a>
       `,
@@ -46,41 +46,89 @@ Vue.component("ButtonItem2", {
 });
 
 Vue.component("LinkButtons", {
-  props: ["items", "keyword"],
+  props: ["items", "keyword", "title"],
+  methods: {
+    SearchItems: (lists, word) => {
+      return lists.filter((item) => {
+        let flg = -1;
+        word.split(" ").forEach((keyitem) => {
+          if (flg !== 0) {
+            flg = ~keywordConv(JSON.stringify(item)).indexOf(keyitem);
+          }
+        });
+        return !word || flg;
+      });
+    },
+  },
   template: `
+      <div v-if="SearchItems(items,keyword).length !== 0">
+      <ListTitle :title="title" />
       <ul class="flex flex-row flex-wrap">
-      <div class="w-full sm:w-1/2 lg:w-1/4 p-1" v-for="item in items" v-if="!keyword || ~keywordConv((item['ツール名'] + item['分類'])).indexOf(keyword)">
+      <div class="w-full sm:w-1/2 lg:w-1/4 p-1" v-for="item in SearchItems(items,keyword)">
       <ButtonItem :item="item">
-        <GrayButton :url="item['URL']" :title="item['ツール名']" :summary="item['分類']" />
+        <GrayButton :url="item['URL']" :title="item['ツール名']" :summary="item['分類']" :comment="item['備考']" />
       </ButtonItem>
       </div>
       </ul>
+      </div>
       `,
 });
 
 Vue.component("ArticlesButtons", {
-  props: ["items", "keyword"],
+  props: ["items", "keyword", "title"],
+  methods: {
+    SearchItems: (lists, word) => {
+      return lists.filter((item) => {
+        let flg = -1;
+        word.split(" ").forEach((keyitem) => {
+          if (flg !== 0) {
+            flg = ~keywordConv(JSON.stringify(item)).indexOf(keyitem);
+          }
+        });
+        return !word || flg;
+      });
+    },
+  },
   template: `
+      <div v-if="SearchItems(items,keyword).length !== 0">
+      <ListTitle :title="title" />
       <ul class="flex flex-row flex-wrap">
-      <div class="w-full lg:w-1/2 p-1" v-for="item in items" v-if="!keyword || ~keywordConv(item['ツール名'] + item['分類']).indexOf(keyword)">
+      <div class="w-full lg:w-1/2 p-1" v-for="item in SearchItems(items,keyword)">
       <ButtonItem :item="item">
-        <GrayButton :url="item['URL']" :title="item['ツール名']" :summary="item['分類']">
+        <GrayButton :url="item['URL']" :title="item['ツール名']" :summary="item['分類']" :comment="item['備考']">
       </ButtonItem>
       <div>
       </ul>
+      </div>
       `,
 });
 
 Vue.component("FormAddButtons", {
-  props: ["items", "keyword"],
+  props: ["items", "keyword", "title"],
+  methods: {
+    SearchItems: (lists, word) => {
+      return lists.filter((item) => {
+        let flg = -1;
+        word.split(" ").forEach((keyitem) => {
+          if (flg !== 0) {
+            flg = ~keywordConv(JSON.stringify(item)).indexOf(keyitem);
+          }
+        });
+        return !word || flg;
+      });
+    },
+  },
   template: `
+      <div v-if="SearchItems(items,keyword).length !== 0">
+      <ListTitle :title="title" />
       <ul class="flex flex-row flex-wrap">
-      <div class="w-full lg:w-1/2 p-1" v-for="item in items" v-if="!keyword || ~keywordConv(item['名称'] + item['分類']).indexOf(keyword)">
+      <div class="w-full lg:w-1/2 p-1" v-for="item in SearchItems(items,keyword)">
       <ButtonItem :item="item">
-        <GrayButton :url="item['URL']" :title="item['名称']" :summary="item['分類']">
+        <GrayButton :url="item['URL']" :title="item['名称']" :summary="item['分類']" :comment="item['備考']">
       </ButtonItem>
       <div>
       </ul>
+      </div>
       `,
 });
 
@@ -159,16 +207,11 @@ Vue.component("tool", {
   <div class="w-full px-4 mt-4">
   <input type="search" class="w-full bg-black focus:bg-gray-900 outline-none rounded-full border border-gray-800 px-4 py-1 text-white" placeholder="検索" v-on:keyup="doSearch"></input>
   </div>
-  <ListTitle title="ツール＆サービス" />
-  <LinkButtons :items="items.data['ツール＆サービス']" :keyword="keyword"></LinkButtons>
-  <ListTitle title="npm module" />
-  <LinkButtons :items="items.data['node.jsモジュール']" :keyword="keyword"></LinkButtons>
-  <ListTitle title="記事" />
-  <ArticlesButtons :items="items.data['参考記事']" :keyword="keyword"></ArticlesButtons>
-  <ListTitle title="Qin-Design共有シート" />
-  <LinkButtons :items="items.data['Qin-Design共有シート']" :keyword="keyword"></LinkButtons>
-  <ListTitle title="フォーム受付" />
-  <FormAddButtons :items="items.data['フォーム受付']" :keyword="keyword"></FormAddButtons>
+  <LinkButtons title="ツール＆サービス" :items="items.data['ツール＆サービス']" :keyword="keyword"></LinkButtons>
+  <LinkButtons title="npm module" :items="items.data['node.jsモジュール']" :keyword="keyword"></LinkButtons>
+  <ArticlesButtons title="記事" :items="items.data['参考記事']" :keyword="keyword"></ArticlesButtons>
+  <LinkButtons title="Qin-Design共有シート" :items="items.data['Qin-Design共有シート']" :keyword="keyword"></LinkButtons>
+  <FormAddButtons title="フォーム受付" :items="items.data['フォーム受付']" :keyword="keyword"></FormAddButtons>
   <ListTitle title="受付フォーム" />
   <div class="w-full text-white text-sm">フォームで追加された内容はおおよそ10分後に反映されますのでしばらくお待ちください！</div>
   <GoogleForm />
