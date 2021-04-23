@@ -204,7 +204,7 @@ Vue.component("tool", {
   },
   template: `
   <div>
-  <div class="w-full px-4 mt-4">
+  <div class="w-full sticky top-0 bg-black px-4 py-2 mt-4">
   <input type="search" class="w-full bg-black focus:bg-gray-900 outline-none rounded-full border border-gray-800 px-4 py-1 text-white" placeholder="検索" v-on:keyup="doSearch"></input>
   </div>
   <LinkButtons title="ツール＆サービス" :items="items.data['ツール＆サービス']" :keyword="keyword"></LinkButtons>
