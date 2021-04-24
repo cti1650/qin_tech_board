@@ -66,6 +66,12 @@ Vue.component("ButtonItem2", {
       `,
 });
 
+Vue.component("MkletButton", {
+  template: `
+      <div class="w-full flex justify-center items-center"><div class="text-white">ブックマークバーへドラッグ⇒</div><div class="bg-gray-800 hover:shadow-inner hover:bg-gray-300 rounded-lg outline-none border border-gray-600 px-2 py-1 shadow-lg text-white hover:text-black"><a href="javascript:(async function(d){let URL='https://script.google.com/macros/s/AKfycbzdElyGY3H5HYcoUKOxOG9-F7LpmwlPe2y13jZv3lskhajjF20A4KiZNT7e6EoMvF2aOQ/exec?url='+location.href+'&title='+document.title;await fetch(URL).then((data)=>{window.alert('%E4%BB%A5%E4%B8%8B%E3%81%AE%E3%83%87%E3%83%BC%E3%82%BF%E3%82%92%E6%8A%95%E7%A8%BF%E3%81%97%E3%81%BE%E3%81%97%E3%81%9F%EF%BC%81'+'\n'+document.title);});})(document);/*__mklet_title:QinTechBoard%E3%81%B8%E8%BF%BD%E5%8A%A0__*/">QinTechBoardへ投稿</a></div></div>
+      `,
+});
+
 Vue.component("LinkButtons", {
   props: ["items", "keyword", "title"],
   methods: {
@@ -166,7 +172,7 @@ Vue.component("GoogleForm", {
   <iframe
     src="https://docs.google.com/forms/d/e/1FAIpQLScP5qjYvNSsm-AtHVm7uQOMXsrcvSoaRyJ9fuyJLF68fdqTNg/viewform?embedded=true"
     width="100%"
-    height="1400px"
+    height="1500px"
     frameborder="0"
     marginheight="0"
     marginwidth="0"
@@ -255,9 +261,11 @@ Vue.component("tool", {
   <ArticlesButtons title="記事" :items="items.data['参考記事']" :keyword="keyword"></ArticlesButtons>
   <LinkButtons title="Qin-Design共有シート" :items="items.data['Qin-Design共有シート']" :keyword="keyword"></LinkButtons>
   <FormAddButtons title="フォーム受付" :items="items.data['フォーム受付']" :keyword="keyword"></FormAddButtons>
+  <FormAddButtons title="ブックマークレット投稿" :items="items.data['ブックマークレット']" :keyword="keyword"></FormAddButtons>
   <ListTitle title="受付フォーム" id="frm" />
   <div class="w-full text-white text-sm">フォームで追加された内容はおおよそ10分後に反映されますのでしばらくお待ちください！</div>
   <GoogleForm />
+  <MkletButton />
   <ScrollTop />
   <FormMove />
   </div>
