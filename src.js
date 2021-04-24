@@ -33,7 +33,7 @@ Vue.component("GrayButton", {
           <div class="text-xs text-gray-500">{{ summary  || '' }}</div>
           <div class="text-xl"><a :href="'https://www.google.com/search?q=' + title" class="text-sm h-full py-1 px-1" target="_blank" rel="noopener noreferrer"><i class="fa fa-search"></i></a> {{ title }}</div>
           <div class="text-xs text-gray-500 px-4">{{ comment  || '' }}</div>
-          <div class="text-gray-500" style="font-size:6px;">{{ tags(tag)  || '' }}</div>
+          <div class="text-gray-500 text-xs">{{ tags(tag)  || '' }}</div>
         </div>
       </a>
       `,
