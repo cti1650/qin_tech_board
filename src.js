@@ -8,12 +8,33 @@ function keywordConv(str) {
 }
 
 Vue.component("GrayButton", {
-  props: ["url", "summary", "title", "comment"],
+  props: ["url", "summary", "title", "comment", "tag"],
+  methods: {
+    tags: (tagStr) => {
+      if (tagStr) {
+        return tagStr
+          .split(",")
+          .map((item) => {
+            if (~item.indexOf("#")) {
+              return item.trim();
+            } else {
+              return "#" + item.trim();
+            }
+          })
+          .join(" ");
+      } else {
+        return "";
+      }
+    },
+  },
   template: `
       <a :href="url" target="_blank" rel="noopener noreferrer">
-      <div class="h-full bg-gray-800 hover:shadow-inner hover:bg-gray-300 rounded-lg outline-none border border-gray-600 px-2 py-1 shadow-lg text-white hover:text-black">
-      <div class="text-xs text-gray-500">{{ summary  || '' }}</div><div class="text-xl"><a :href="'https://www.google.com/search?q=' + title" class="text-sm h-full" target="_blank" rel="noopener noreferrer"><i class="fa fa-search"></i></a> {{ title }}</div><div class="text-xs text-gray-500 px-4">{{ comment  || '' }}</div>
-      </div>
+        <div class="h-full bg-gray-800 hover:shadow-inner hover:bg-gray-300 rounded-lg outline-none border border-gray-600 px-2 py-1 shadow-lg text-white hover:text-black">
+          <div class="text-xs text-gray-500">{{ summary  || '' }}</div>
+          <div class="text-xl"><a :href="'https://www.google.com/search?q=' + title" class="text-sm h-full py-1 px-1" target="_blank" rel="noopener noreferrer"><i class="fa fa-search"></i></a> {{ title }}</div>
+          <div class="text-xs text-gray-500 px-4">{{ comment  || '' }}</div>
+          <div class="text-gray-500" style="font-size:6px;">{{ tags(tag)  || '' }}</div>
+        </div>
       </a>
       `,
 });
@@ -66,7 +87,7 @@ Vue.component("LinkButtons", {
       <ul class="flex flex-row flex-wrap">
       <div class="w-full sm:w-1/2 lg:w-1/4 p-1" v-for="item in SearchItems(items,keyword)">
       <ButtonItem :item="item">
-        <GrayButton :url="item['URL']" :title="item['ツール名']" :summary="item['分類']" :comment="item['備考']" />
+        <GrayButton :url="item['URL']" :title="item['ツール名']" :summary="item['分類']" :comment="item['備考']" :tag="item['タグ']" />
       </ButtonItem>
       </div>
       </ul>
