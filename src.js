@@ -116,7 +116,7 @@ Vue.component("ArticlesButtons", {
       <ul class="flex flex-row flex-wrap">
       <div class="w-full lg:w-1/2 p-1" v-for="item in SearchItems(items,keyword)">
       <ButtonItem :item="item">
-        <GrayButton :url="item['URL']" :title="item['ツール名']" :summary="item['分類']" :comment="item['備考']">
+        <GrayButton :url="item['URL']" :title="item['ツール名']" :summary="item['分類']" :comment="item['備考']" :tag="item['タグ']>
       </ButtonItem>
       <div>
       </ul>
@@ -145,7 +145,7 @@ Vue.component("FormAddButtons", {
       <ul class="flex flex-row flex-wrap">
       <div class="w-full lg:w-1/2 p-1" v-for="item in SearchItems(items,keyword)">
       <ButtonItem :item="item">
-        <GrayButton :url="item['URL']" :title="item['名称']" :summary="item['分類']" :comment="item['備考']">
+        <GrayButton :url="item['URL']" :title="item['名称']" :summary="item['分類']" :comment="item['備考']" :tag="item['タグ']>
       </ButtonItem>
       <div>
       </ul>
