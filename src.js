@@ -12,7 +12,7 @@ Vue.component("GrayButton", {
   template: `
       <a :href="url" target="_blank" rel="noopener noreferrer">
       <div class="h-full bg-gray-800 hover:shadow-inner hover:bg-gray-300 rounded-lg outline-none border border-gray-600 px-2 py-1 shadow-lg text-white hover:text-black">
-      <div class="text-xs text-gray-500">{{ summary  || '' }}</div><div class="text-xl">{{ title }}</div><div class="text-xs text-gray-500 px-4">{{ comment  || '' }}</div>
+      <div class="text-xs text-gray-500">{{ summary  || '' }}</div><div class="text-xl"><a :href="'https://www.google.com/search?q=' + title" class="text-sm h-full" target="_blank" rel="noopener noreferrer"><i class="fa fa-search"></i></a> {{ title }}</div><div class="text-xs text-gray-500 px-4">{{ comment  || '' }}</div>
       </div>
       </a>
       `,
