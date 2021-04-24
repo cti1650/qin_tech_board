@@ -191,8 +191,30 @@ Vue.component("ScrollTop", {
     style="right:0.5rem;bottom:0.5rem;width:2.5rem;height:2.5rem;line-none;cursor:pointer;"
     @click="scrollTop"
   >
-    ▲
+    <i class="fa fa-chevron-up"></i>
   </div>
+  `,
+});
+
+Vue.component("FormMove", {
+  methods: {
+    scrollTop: function () {
+      let clientRect = document.getElementById("frm").getBoundingClientRect();
+      let px = window.pageYOffset + clientRect.top;
+      window.scrollTo({
+        top: px,
+        behavior: "smooth",
+      });
+    },
+  },
+  template: `
+  <div
+    class="fixed text-xl p-1 outline-none z-50 bg-gray-700 bg-opacity-50 text-center text-gray-400 rounded-full"
+    style="right:0.5rem;bottom:3.5rem;width:2.5rem;height:2.5rem;line-none;cursor:pointer;"
+    @click="scrollTop"
+  >
+    <i class="fa fa-plus"></i>
+ </div>
   `,
 });
 
@@ -233,10 +255,11 @@ Vue.component("tool", {
   <ArticlesButtons title="記事" :items="items.data['参考記事']" :keyword="keyword"></ArticlesButtons>
   <LinkButtons title="Qin-Design共有シート" :items="items.data['Qin-Design共有シート']" :keyword="keyword"></LinkButtons>
   <FormAddButtons title="フォーム受付" :items="items.data['フォーム受付']" :keyword="keyword"></FormAddButtons>
-  <ListTitle title="受付フォーム" />
+  <ListTitle title="受付フォーム" id="frm" />
   <div class="w-full text-white text-sm">フォームで追加された内容はおおよそ10分後に反映されますのでしばらくお待ちください！</div>
   <GoogleForm />
   <ScrollTop />
+  <FormMove />
   </div>
   `,
 });
